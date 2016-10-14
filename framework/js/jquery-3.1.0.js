@@ -9125,9 +9125,10 @@ jQuery.extend( {
 		return jqXHR;
 	},
 
-	getJSON: function( url, data, callback ) {
+	getJSONsync: function(url, data, callback ) {
 		return jQuery.get( url, data, callback, "json" );
 	},
+	
 
 	getScript: function( url, callback ) {
 		return jQuery.get( url, undefined, callback, "script" );
@@ -9150,10 +9151,13 @@ jQuery.each( [ "get", "post" ], function( i, method ) {
 			type: method,
 			dataType: type,
 			data: data,
-			success: callback
+			success: callback,
+			async: false
 		}, jQuery.isPlainObject( url ) && url ) );
 	};
 } );
+	
+
 
 
 jQuery._evalUrl = function( url ) {
