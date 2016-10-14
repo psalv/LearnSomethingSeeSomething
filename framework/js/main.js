@@ -1,5 +1,7 @@
 
-
+/**
+ * JQuery functionality for all buttons.
+ */
 $(function() {
 
     $('#toggleCol').on('mouseover', function(){
@@ -28,6 +30,9 @@ $(function() {
 });
 
 
+/**
+ * JSONP requests for the two images used, utilizes Reddit's API.
+ */
 function loadImages () {
 
     var artUrl = 'https://www.reddit.com/r/art/top/.json?limit=1&jsonp';
@@ -37,11 +42,14 @@ function loadImages () {
 
         var imageUrl = data['data']['children'][0]['data']['url'];
 
+        /* Specific urls such as imgur.com do not always come as link to .jpgs, detect and correct. */
+
         if(!(imageUrl.endsWith('.jpg'))){
             imageUrl += '.jpg';
         }
 
         /* Setting the proportions for responsive resizing. */
+
         var img = new Image();
         img.onload = function () {
             if(this.width > this.height){
@@ -66,13 +74,6 @@ function loadImages () {
 
     $.getJSONsync(earthUrl, null, function (data) {
 
-
-        var img = new Image();
-        img.onload = function () {
-            alert(this.width + 'x' + this.height)
-        };
-
-
         $('body').css('background-image', 'url(' + data['data']['children'][0]['data']['url'] + ')');
         $('#earthLink').attr('href', 'http://reddit.com' + data['data']['children'][0]['data']['permalink']);
 
@@ -80,6 +81,11 @@ function loadImages () {
 }
 
 
+/**
+ * Makes a JSONP request to wordnik to retrieve a random word to look up in the Pearson dictionary.
+ *
+ * @returns {string} a random word
+ */
 function loadWord (){
 
     var word = "failure";
@@ -95,6 +101,14 @@ function loadWord (){
 }
 
 
+/**
+ * Uses the Pearson dictionary API to search for the definition of the inputted word.
+ * If the query returns no words, exits. Otherwise it will take the first word and definition form the query.
+ * Note: the definition chosen is not necessarily the word inputted, because the words are randomized this is not an issue.
+ *
+ * @param word a string containing a word that may or may not be in the dictionary
+ * @returns {boolean} true if the word was in the dictionary, false if it was not
+ */
 function loadDefinition (word) {
 
     var toExit = false;
@@ -111,8 +125,9 @@ function loadDefinition (word) {
 
             toExit = true;
 
-            $('#defn').html(data.results[0]['senses'][0]['definition'][0]);
+            /* If we found atleast one word than we choose the first */
 
+            $('#defn').html(data.results[0]['senses'][0]['definition'][0]);
             $('#word').html(JSON.stringify(data.results[0]['headword']));
 
         }
@@ -121,13 +136,19 @@ function loadDefinition (word) {
 }
 
 
+/**
+ * Calls all functions using JSONP requests.
+ * The JSONP requests have been made synchronous since the input of one depends on the output of another.
+ */
 $(function () {
 
     loadImages();
     var word = loadWord();
 
+    /* We continue trying random words until we find one that is in the dictionary. */
+
     while(!loadDefinition(word)){
-        word = loadWord(false);
+        word = loadWord();
     }
 
 });

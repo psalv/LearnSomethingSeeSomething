@@ -1,8 +1,10 @@
 
 /* For debugging purposes */
-*{
-    border: 1px solid red !important;
-}
+/**{*/
+    /*border: 1px solid red !important;*/
+/*}*/
+
+
 
 *{
     font-family: 'Trocchi', serif;
@@ -14,6 +16,8 @@ body{
     color: white;
 }
 
+
+/* Event toggling images */
 .toggler{
     width: 30px;
     height: 30px;
@@ -21,6 +25,7 @@ body{
     margin-right: 0 !important;
 }
 
+/* Links to image sources */
 .col-xs-2{
     padding-right: 0;
     min-width: 80px;
@@ -59,7 +64,6 @@ body{
     margin-top: 1%;
 }
 
-
 #popup{
     width:200px;
     padding: 3%;
@@ -77,21 +81,11 @@ body{
     margin: 5px;
 }
 
-#header{
-    padding: 2px;
-    min-height: 49px;
-    width: 100%;
-}
-
 #icons{
     min-width: 100px;
     max-width: 100px;
 }
 
 #toggleFnt{
-    float: right;
-}
-
-.col-md-2{
     float: right;
 }
