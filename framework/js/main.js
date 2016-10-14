@@ -41,6 +41,7 @@ function loadImages () {
             imageUrl += '.jpg';
         }
 
+        /* Setting the proportions for responsive resizing. */
         var img = new Image();
         img.onload = function () {
             if(this.width > this.height){
