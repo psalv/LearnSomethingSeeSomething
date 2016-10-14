@@ -1,19 +1,6 @@
 
 
 
-/*
-
-Random word: http://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&minCorpusCount=0&minLength=5&maxLength=15&limit=1&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5
-
-    Words do not always have definitions, I need to check that the count > 0,
-    if so then I will take the very first word, otherwise query a new word from wordnik
-
-Pearson definition: https://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=believe&apikey=BWA5NE802N4PAN4xqAXQIGXd0EvnX88e
-
-    change the headword value to that of the word.
-
- */
-
 
 
 // TODO current issue is synchronizing the events, I need for certain events to occur before others can happen.
@@ -21,77 +8,37 @@ Pearson definition: https://api.pearson.com/v2/dictionaries/ldoce5/entries?headw
 // TODO first thing to happen is going to be loading the images, if I can create a loop that waits for a JSON to finish,
 // TODO then I can reuse the code above.
 
-// TODO First needs to be loading the word, and then checking the count
-// TODO I need to loop these events until I find a word with count > 0
 
 // TODO I then need to set the fields
 
 
-
-
-
+/**
+ * Parse reddit for the top /r/art and /r/earthporn post,
+ * which act as the main image and background respectively.
+ */
 $(function () {
 
     var artUrl = 'https://www.reddit.com/r/art/top/.json?limit=1&jsonp';
     var earthUrl = 'https://www.reddit.com/r/earthporn/top/.json?limit=1&jsonp';
 
-    // Reddit parser
-    $.getJSON(artUrl, null, function (data) {
+    $.getJSONsync(artUrl, null, function (data) {
 
-        var allData = JSON.stringify(data);
-
-        var locked = allData.search('locked');
-        var postLocked = allData.slice(locked);
-
-        var thread = allData.slice(allData.search('permalink') + 12, locked - 3);
-        var image = postLocked.slice(postLocked.search('url') + 6, postLocked.search('author') - 3);
-
-        $('.art').attr('src', image);
-        $('#artLink').attr('href', 'http://reddit.com' + thread);
-
-    });
-
-    $.getJSON(earthUrl, null, function (data) {
-
-        var allData = JSON.stringify(data);
-
-        var locked = allData.search('locked');
-        var postLocked = allData.slice(locked);
-
-        var thread = allData.slice(allData.search('permalink') + 12, locked - 3);
-        var image = postLocked.slice(postLocked.search('url') + 6, postLocked.search('author') - 3);
+        console.log(data['data']['children'][0]['data']['url']);
+        $('.art').attr('src', data['data']['children'][0]['data']['url']);
+        $('#artLink').attr('href', 'http://reddit.com' + data['data']['children'][0]['data']['permalink']);
         
-        $('body').css('background-image', 'url(' + image.toString() + ')');
-        $('#earthLink').attr('href', 'http://reddit.com' + thread);
 
     });
-    
+
+    $.getJSONsync(earthUrl, null, function (data) {
+
+        $('body').css('background-image', 'url(' + data['data']['children'][0]['data']['url'] + ')');
+        $('#earthLink').attr('href', 'http://reddit.com' + data['data']['children'][0]['data']['permalink']);
+
+    });
 });
 
 
-
-
-// Gets a random word
-$(function () {
-
-    $.getJSON("http://api.wordnik.com/v4/words.json/rando" +
-            "mWords?hasDictionaryDef=true&minCorpusCount=0&mi" +
-            "nLength=5&maxLength=15&limit=1&api_key=a2a73e7b9" +
-            "26c924fad7001ca3111acd55af2ffabf50eb4ae5", null, function(data){
-
-        randomWord = JSON.stringify(data[0].word);
-        // $('#word').html(randomWord);
-    });
-
-});
-
-
-
-
-
-
-// 1) find the count
-// 2) find the first definition from the definition json
 
 // 3) wait for callback from wordJson
 // 4) enter definition json, if count = 0, then exit and continue to loop
@@ -104,15 +51,40 @@ $(function () {
 
 $(function () {
 
-    var dictUrl = "https://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=" +
-        document.getElementById('#word') +
-        "&apikey=BWA5NE802N4PAN4xqAXQIGXd0EvnX88e";
+    var toExit = false;
 
-    console.log($('#word').text());
+    var word;
 
-    $.getJSON(dictUrl, null, function(data){
-        console.log(JSON.stringify(data));
-    });
+
+        /* Retrieves a random word */
+
+        $.getJSONsync("http://api.wordnik.com/v4/words.json/rando" +
+                "mWords?hasDictionaryDef=true&minCorpusCount=0&mi" +
+                "nLength=5&maxLength=15&limit=1&api_key=a2a73e7b9" +
+                "26c924fad7001ca3111acd55af2ffabf50eb4ae5", null, function(data){
+
+            word = data[0].word;
+        });
+
+
+        var dictUrl = "https://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=" +
+                            $('#word').text() + "&apikey=BWA5NE802N4PAN4xqAXQIGXd0EvnX88e";
+
+        $.getJSONsync(dictUrl, null, function(data){
+
+            /* Since the word is not guaranteed to be in the Pearson dictionary,
+            *  we check the number of entries before continuing. */
+
+            if(data.count != 0){
+
+                toExit = true;
+
+                $('#defn').html(data.results[0]['senses'][0]['definition'][0]);
+
+                $('#word').html(JSON.stringify(data.results[0]['headword']));
+
+            }
+        });
 
 });
 
