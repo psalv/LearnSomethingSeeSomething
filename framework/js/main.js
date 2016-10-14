@@ -1,4 +1,5 @@
 
+
 $(function() {
 
     $('#toggleCol').on('mouseover', function(){
@@ -7,15 +8,24 @@ $(function() {
     $('#links').on('mouseover', function(){
         $('.col-xs-2').fadeToggle(1000);
     });
+    $('#toggleFnt').on('mouseover', function(){
+
+        var curColor = $('body').css('color');
+
+        if(curColor == 'rgb(0, 0, 0)'){
+            $('#toggleFnt').attr('src', '/res/icon3.png');
+            $('body').css('color', 'white');
+        }
+        else{
+            $('#toggleFnt').attr('src', '/res/icon4.png');
+            $('body').css('color', 'black');
+        }
+    });
 
     $('h4').on('click', function(){
         window.open($(this).attr('href'), '_self');
     });
 });
-
-
-
-
 
 
 function loadImages () {
@@ -28,7 +38,6 @@ function loadImages () {
         $('.art').attr('src', data['data']['children'][0]['data']['url']);
         $('#artLink').attr('href', 'http://reddit.com' + data['data']['children'][0]['data']['permalink']);
         
-
     });
 
     $.getJSONsync(earthUrl, null, function (data) {
@@ -38,6 +47,7 @@ function loadImages () {
 
     });
 }
+
 
 function loadWord (){
 
@@ -50,16 +60,11 @@ function loadWord (){
 
         word = data[0].word;
     });
-
-
     return word;
 }
 
 
-
 function loadDefinition (word) {
-
-
 
     var toExit = false;
 
@@ -67,7 +72,6 @@ function loadDefinition (word) {
                         word + "&apikey=BWA5NE802N4PAN4xqAXQIGXd0EvnX88e";
 
     $.getJSONsync(dictUrl, null, function(data){
-
 
         /* Since the word is not guaranteed to be in the Pearson dictionary,
         *  we check the number of entries before continuing. */
@@ -82,9 +86,7 @@ function loadDefinition (word) {
 
         }
     });
-
     return toExit;
-
 }
 
 
