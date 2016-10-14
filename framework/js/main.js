@@ -35,12 +35,42 @@ function loadImages () {
 
     $.getJSONsync(artUrl, null, function (data) {
 
-        $('.art').attr('src', data['data']['children'][0]['data']['url']);
+        var imageUrl = data['data']['children'][0]['data']['url'];
+
+        if(!(imageUrl.endsWith('.jpg'))){
+            imageUrl += '.jpg';
+        }
+
+        var img = new Image();
+        img.onload = function () {
+            if(this.width > this.height){
+                var ratio = (this.height / this.width) * 100;
+                $('.art').css('width', '100%');
+                $('.art').css('height', ratio + '%');
+            }
+            else{
+                var ratio = (this.width / this.height) * 100;
+                $('.art').css('height', '100%');
+                $('.art').css('width', ratio + '%');
+
+            }
+        };
+        img.src = imageUrl;
+
+
+        $('.art').attr('src', imageUrl);
         $('#artLink').attr('href', 'http://reddit.com' + data['data']['children'][0]['data']['permalink']);
         
     });
 
     $.getJSONsync(earthUrl, null, function (data) {
+
+
+        var img = new Image();
+        img.onload = function () {
+            alert(this.width + 'x' + this.height)
+        };
+
 
         $('body').css('background-image', 'url(' + data['data']['children'][0]['data']['url'] + ')');
         $('#earthLink').attr('href', 'http://reddit.com' + data['data']['children'][0]['data']['permalink']);
