@@ -35,14 +35,22 @@ $(function() {
  */
 function loadImages () {
 
-    var artUrl = 'https://www.reddit.com/r/art/top/.json?limit=1&jsonp';
-    var earthUrl = 'https://www.reddit.com/r/earthporn/top/.json?limit=1&jsonp';
+    var artUrl = 'https://www.reddit.com/r/art/top/.json?&jsonp';
+    var earthUrl = 'https://www.reddit.com/r/earthporn/top/.json?&jsonp';
 
     $.getJSONsync(artUrl, null, function (data) {
 
-        var imageUrl = data['data']['children'][0]['data']['url'];
+        var i = 0;
+        var imageUrl = data['data']['children'][i++]['data']['url'];
 
-        /* Specific urls such as imgur.com do not always come as link to .jpgs, detect and correct. */
+        /* Only accept pictures from imgur, as other websites (such as flickr)
+           can have restrictions on which photos can be downloaded. */
+
+        while(imageUrl.indexOf('imgur') == -1){
+            imageUrl = data['data']['children'][i++]['data']['url'];
+        }
+
+        /* Specific urls to imgur.com do not always come as link to .jpgs, detect and correct. */
 
         if(!(imageUrl.endsWith('.jpg'))){
             imageUrl += '.jpg';
@@ -68,14 +76,25 @@ function loadImages () {
 
 
         $('.art').attr('src', imageUrl);
-        $('#artLink').attr('href', 'http://reddit.com' + data['data']['children'][0]['data']['permalink']);
+        $('#artLink').attr('href', 'http://reddit.com' + data['data']['children'][i - 1]['data']['permalink']);
         
     });
 
     $.getJSONsync(earthUrl, null, function (data) {
 
-        $('body').css('background-image', 'url(' + data['data']['children'][0]['data']['url'] + ')');
-        $('#earthLink').attr('href', 'http://reddit.com' + data['data']['children'][0]['data']['permalink']);
+        var i = 0;
+        var imageUrl = data['data']['children'][i++]['data']['url'];
+
+        while(imageUrl.indexOf('imgur') == -1){
+            imageUrl = data['data']['children'][i++]['data']['url'];
+        }
+
+        if(!(imageUrl.endsWith('.jpg'))){
+            imageUrl += '.jpg';
+        }
+
+        $('body').css('background-image', 'url(' + imageUrl + ')');
+        $('#earthLink').attr('href', 'http://reddit.com' + data['data']['children'][i - 1]['data']['permalink']);
 
     });
 }
