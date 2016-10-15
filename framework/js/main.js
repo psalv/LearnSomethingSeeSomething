@@ -93,6 +93,16 @@ function loadImages () {
             imageUrl += '.jpg';
         }
 
+        var img = new Image();
+        img.onload = function () {
+
+            var ratio = (this.width / this.height) * 100 * 2.5;
+            $('body').css('background-size', ratio + '%');
+
+        };
+        img.src = imageUrl;
+
+
         $('body').css('background-image', 'url(' + imageUrl + ')');
         $('#earthLink').attr('href', 'http://reddit.com' + data['data']['children'][i - 1]['data']['permalink']);
 
