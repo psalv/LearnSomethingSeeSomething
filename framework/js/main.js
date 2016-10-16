@@ -2,7 +2,7 @@
 /**
  * JQuery functionality for all buttons.
  */
-$(function() {
+$(function jqueryEvents () {
 
     $('#toggleCol').on('mouseover', function(){
         $('.col-md-6').fadeToggle(1000);
@@ -166,18 +166,35 @@ function loadDefinition (word) {
 
 
 /**
+ * Function to correct the definition not loading due to connectivity issues.
+ */
+function correctNotLoaded () {
+
+    console.log();
+
+    if(document.getElementById('word').textContent == "" || document.getElementById('defn').textContent == ""){
+        $('#word').html("failure");
+        $('#defn').html("is the state or condition of not meeting a desirable or intended objective, and may be viewed as the opposite of success.");
+    }
+}
+
+
+/**
  * Calls all functions using JSONP requests.
  * The JSONP requests have been made synchronous since the input of one depends on the output of another.
  */
-$(function () {
+$(function init () {
 
     loadImages();
     var word = loadWord();
 
     /* We continue trying random words until we find one that is in the dictionary. */
 
-    while(!loadDefinition(word)){
+    var count = 0;
+    while(!loadDefinition(word) && count++ <= 20){
         word = loadWord();
     }
+
+    correctNotLoaded();
 
 });
