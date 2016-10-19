@@ -152,13 +152,17 @@ function loadDefinition (word) {
 
         if(data.count != 0){
 
-            toExit = true;
+            var definition = data.results[0]['senses'][0]['definition'][0];
 
-            /* If we found atleast one word than we choose the first */
+            if(definition.length <= 200){
 
-            $('#defn').html(data.results[0]['senses'][0]['definition'][0]);
-            $('#word').html(JSON.stringify(data.results[0]['headword']));
+                toExit = true;
 
+                /* If we found atleast one word than we choose the first */
+
+                $('#defn').html(definition);
+                $('#word').html(JSON.stringify(data.results[0]['headword']));
+            }
         }
     });
     return toExit;
@@ -169,9 +173,7 @@ function loadDefinition (word) {
  * Function to correct the definition not loading due to connectivity issues.
  */
 function correctNotLoaded () {
-
-    console.log();
-
+    
     if(document.getElementById('word').textContent == "" || document.getElementById('defn').textContent == ""){
         $('#word').html("failure");
         $('#defn').html("is the state or condition of not meeting a desirable or intended objective, and may be viewed as the opposite of success.");
