@@ -47,7 +47,7 @@ function loadImages () {
            can have restrictions on which photos can be downloaded. */
 
         // while(imageUrl.indexOf('imgur') == -1){
-        while(imageUrl.indexOf('i.redd') == -1 && imageUrl.indexOf('imgur') == -1){
+        while(imageUrl.indexOf('i.redd.it') == -1 && imageUrl.indexOf('imgur') == -1){
             imageUrl = data['data']['children'][i++]['data']['url'];
         }
 
@@ -86,7 +86,7 @@ function loadImages () {
         var i = 0;
         var imageUrl = data['data']['children'][i++]['data']['url'];
 
-        while(imageUrl.indexOf('i.redd') == -1 && imageUrl.indexOf('imgur') == -1){
+        while(imageUrl.indexOf('i.redd.it') == -1 && imageUrl.indexOf('imgur') == -1){
             imageUrl = data['data']['children'][i++]['data']['url'];
         }
 
