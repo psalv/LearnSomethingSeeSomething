@@ -46,14 +46,13 @@ function loadImages () {
         /* Only accept pictures from imgur and i.redd, as other websites (such as flickr)
            can have restrictions on which photos can be downloaded. */
 
-        // while(imageUrl.indexOf('imgur') == -1){
-        while(imageUrl.indexOf('i.redd.it') == -1 && imageUrl.indexOf('imgur') == -1){
+        while(imageUrl.indexOf('i.redd.it') == -1 && imageUrl.indexOf('imgur') == -1 || imageUrl.endsWith('.gifv')){
             imageUrl = data['data']['children'][i++]['data']['url'];
         }
 
         /* Specific urls to imgur.com do not always come as link to .jpgs, detect and correct. */
 
-        if(!(imageUrl.endsWith('.jpg')) && imageUrl.indexOf('imgur') != -1){
+        if(!imageUrl.endsWith('.jpg') && imageUrl.indexOf('imgur') != -1){
             imageUrl += '.jpg';
         }
 
@@ -86,7 +85,7 @@ function loadImages () {
         var i = 0;
         var imageUrl = data['data']['children'][i++]['data']['url'];
 
-        while(imageUrl.indexOf('i.redd.it') == -1 && imageUrl.indexOf('imgur') == -1){
+        while(imageUrl.indexOf('i.redd.it') == -1 && imageUrl.indexOf('imgur') == -1 || imageUrl.endsWith('.gifv')){
             imageUrl = data['data']['children'][i++]['data']['url'];
         }
 
