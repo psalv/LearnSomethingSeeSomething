@@ -22,6 +22,7 @@ body{
     height: 30px;
     margin: 2px;
     margin-right: 0 !important;
+    cursor: pointer;
 }
 
 /* Links to image sources */
@@ -90,6 +91,10 @@ body{
 #icons{
     min-width: 100px;
     max-width: 100px;
+}
+
+.lnk{
+    cursor: pointer;
 }
 
 #toggleFnt{
