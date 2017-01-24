@@ -4,13 +4,13 @@
  */
 $(function jqueryEvents () {
 
-    $('#toggleCol').on('mouseover', function(){
+    $('#toggleCol').on('click', function(){
         $('.col-md-6').fadeToggle(1000);
     });
     $('#links').on('mouseover', function(){
         $('.col-xs-2').fadeToggle(1000);
     });
-    $('#toggleFnt').on('mouseover', function(){
+    $('#toggleFnt').on('click', function(){
 
         var curColor = $('body').css('color');
 
@@ -59,16 +59,21 @@ function loadImages () {
         /* Setting the proportions for responsive resizing. */
 
         var img = new Image();
+        var ratio;
         img.onload = function () {
             if(this.width > this.height){
-                var ratio = (this.height / this.width) * 100;
-                $('.art').css('width', '100%');
-                $('.art').css('height', ratio + '%');
+                ratio = (this.height / this.width) * 100;
+                $('.art').css({
+                    height: '100%',
+                    width: ratio + '%'
+                });
             }
             else{
-                var ratio = (this.width / this.height) * 100;
-                $('.art').css('height', '100%');
-                $('.art').css('width', ratio + '%');
+                ratio = (this.width / this.height) * 100;
+                $('.art').css({
+                    height: '100%',
+                    width: ratio + '%'
+                });
 
             }
         };
