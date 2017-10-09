@@ -100,3 +100,33 @@ body{
 #toggleFnt{
     float: right;
 }
+
+
+
+
+/* centerer */
+
+#car-2 .informationContainer {
+    height: 100vh;
+    background-color: #1b6d85;
+}
+#car-2 .informationContainer .centerContainer {
+    display: table;
+    height: inherit;
+}
+#car-2 .informationContainer .centerElement {
+    display: table-cell;
+    vertical-align: middle;
+}
+#car-2 .informationContainer .containerRight {
+    height: inherit;
+    width: 40%;
+    margin-right: 5% !important;
+    margin-left: 2.5% !important;
+}
+#car-2 .informationContainer .containerLeft {
+    height: inherit;
+    width: 40%;
+    margin-left: 5% !important;
+    margin-right: 2.5% !important;
+}
