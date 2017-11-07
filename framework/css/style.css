@@ -148,7 +148,9 @@ a:focus{
 
 
 
-
+.fullWidth{
+    width: 100%;
+}
 
 .centerContainer {
     display: table;

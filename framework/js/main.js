@@ -4,22 +4,20 @@
  */
 $(function jqueryEvents () {
 
-
     $('#fa1').on('click', function(){
 
         var curColor = $('body').css('color');
 
         if(curColor == 'rgb(0, 0, 0)'){
-            $('#toggleFnt').attr('src', '/res/icon3.png');
             $('body').css('color', 'white');
             $('a').css('color', 'white');
         }
         else{
-            $('#toggleFnt').attr('src', '/res/icon4.png');
             $('body').css('color', 'black');
             $('a').css('color', 'black');
         }
     });
+
 });
 
 
@@ -174,6 +172,7 @@ function correctNotLoaded () {
         $('#word').html("failure");
         $('#defn').html("is the state or condition of not meeting a desirable or intended objective, and may be viewed as the opposite of success.");
     }
+
 }
 
 
@@ -184,14 +183,14 @@ function correctNotLoaded () {
 $(function init () {
 
     loadImages();
-    // var word = loadWord();
+    var word = loadWord();
 
     /* We continue trying random words until we find one that is in the dictionary. */
 
-    // var count = 0;
-    // while(!loadDefinition(word) && count++ <= 20){
-    //     word = loadWord();
-    // }
+    var count = 0;
+    while(!loadDefinition(word) && count++ <= 20){
+        word = loadWord();
+    }
 
     correctNotLoaded();
 

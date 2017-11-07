@@ -1,14 +1,13 @@
 {
   "name":"Learn something, See something",
   "short_name": "LSSS",
-  "version":"1.13",
+  "version":"2.0",
   "manifest_version":2,
   "description":"We grow a little every day.",
 
   "chrome_url_overrides":{
     "newtab": "NewTab.html"
   },
-
 
   "browser_action": {
     "default_icon":"res/icon1.png",
