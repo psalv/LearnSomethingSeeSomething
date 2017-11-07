@@ -6,8 +6,8 @@
     <link href="framework/css/style.css" rel="stylesheet" type="text/css">
 
     <title>New Tab</title>
-    <link href="https://fonts.googleapis.com/css?family=Trocchi" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Trocchi" rel="stylesheet">
+    <link href="framework/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body id="parent">
@@ -20,32 +20,27 @@
         <div class="centerElement">
             <div class="row informationContainer">
 
-                <!--<div class="centerContainer">-->
-                    <!--<div class="centerElement">-->
+                <!-- This is the container for picking the information -->
+                <div class="col-md-6 containerLeft">
+                    <div class="centerContainer fullWidth">
+                        <div class="centerElement fullWidth">
+                            <img src="" id="art" class="art">
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- This is the container for picking the information -->
-                        <div class="col-md-6 containerLeft">
-                            <div class="centerContainer fullWidth">
-                                <div class="centerElement fullWidth">
-                                    <img src="" id="art" class="art">
-                                </div>
+                <!-- In this container the information will be displayed -->
+                <div class="col-md-6 containerRight">
+                    <div class="centerContainer">
+                        <div class="centerElement">
+                            <div class="def">
+                                <h1 id="word"></h1>
+                                <p id="defn"></p>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- In this container the information will be displayed -->
-                        <div class="col-md-6 containerRight">
-                            <div class="centerContainer">
-                                <div class="centerElement">
-                                    <div class="def">
-                                        <h1 id="word"></h1>
-                                        <p id="defn"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    <!--</div>-->
-                <!--</div>-->
             </div>
         </div>
     </div>
