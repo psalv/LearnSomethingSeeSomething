@@ -4,28 +4,21 @@
  */
 $(function jqueryEvents () {
 
-    $('#toggleCol').on('click', function(){
-        $('.col-md-6').fadeToggle(1000);
-    });
-    $('#links').on('mouseover', function(){
-        $('.col-xs-2').fadeToggle(1000);
-    });
-    $('#toggleFnt').on('click', function(){
+
+    $('#fa1').on('click', function(){
 
         var curColor = $('body').css('color');
 
         if(curColor == 'rgb(0, 0, 0)'){
             $('#toggleFnt').attr('src', '/res/icon3.png');
             $('body').css('color', 'white');
+            $('a').css('color', 'white');
         }
         else{
             $('#toggleFnt').attr('src', '/res/icon4.png');
             $('body').css('color', 'black');
+            $('a').css('color', 'black');
         }
-    });
-
-    $('h4').on('click', function(){
-        window.open($(this).attr('href'), '_self');
     });
 });
 
@@ -59,29 +52,27 @@ function loadImages () {
         /* Setting the proportions for responsive resizing. */
 
         var img = new Image();
-        var ratio;
+
         img.onload = function () {
+
             if(this.width > this.height){
-                ratio = (this.height / this.width) * 100;
                 $('.art').css({
-                    height: '100%',
-                    width: ratio + '%'
+                    width: '92%'
                 });
             }
             else{
-                ratio = (this.width / this.height) * 100;
                 $('.art').css({
-                    height: '100%',
-                    width: ratio + '%'
+                    height: '80%'
                 });
 
             }
         };
+
         img.src = imageUrl;
 
 
         $('.art').attr('src', imageUrl);
-        $('#artLink').attr('href', 'http://reddit.com' + data['data']['children'][i - 1]['data']['permalink']);
+        $('#fa3').parent().attr('href', 'http://reddit.com' + data['data']['children'][i - 1]['data']['permalink']);
         
     });
 
@@ -109,7 +100,7 @@ function loadImages () {
 
 
         $('body').css('background-image', 'url(' + imageUrl + ')');
-        $('#earthLink').attr('href', 'http://reddit.com' + data['data']['children'][i - 1]['data']['permalink']);
+        $('#fa2').parent().attr('href', 'http://reddit.com' + data['data']['children'][i - 1]['data']['permalink']);
 
     });
 }
@@ -193,14 +184,14 @@ function correctNotLoaded () {
 $(function init () {
 
     loadImages();
-    var word = loadWord();
+    // var word = loadWord();
 
     /* We continue trying random words until we find one that is in the dictionary. */
 
-    var count = 0;
-    while(!loadDefinition(word) && count++ <= 20){
-        word = loadWord();
-    }
+    // var count = 0;
+    // while(!loadDefinition(word) && count++ <= 20){
+    //     word = loadWord();
+    // }
 
     correctNotLoaded();
 
