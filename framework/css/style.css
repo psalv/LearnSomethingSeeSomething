@@ -18,6 +18,17 @@ body{
     height: 100vh;
 }
 
+/* POPUP */
+
+#popup{
+    width:200px;
+    padding: 3%;
+
+    vertical-align: middle;
+    margin: auto;
+    display: block;
+}
+
 
 /* ICONS */
 
