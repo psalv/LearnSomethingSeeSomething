@@ -98,7 +98,8 @@ a:focus{
         display: none;
     }
     .art{
-        margin: 8% !important;
+        margin-top: 8% !important;
+        margin-bottom: 8% !important;
     }
     #art{
         max-width: 84%;
