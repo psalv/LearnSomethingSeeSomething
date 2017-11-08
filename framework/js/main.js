@@ -60,7 +60,7 @@ function loadImages () {
             }
             else{
                 $('.art').css({
-                    height: '80%'
+                    height: '80vh'
                 });
 
             }

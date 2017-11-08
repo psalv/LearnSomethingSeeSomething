@@ -76,13 +76,9 @@ a:focus{
 }
 
 .art{
-    /*width: auto;*/
-    /*height: auto;*/
     display: block;
     margin: auto;
 
-    /*margin: 4%;*/
-    /*margin-top: 0% !important;*/
     border: black 4px solid !important;
 
     vertical-align: middle;
@@ -140,19 +136,6 @@ a:focus{
     margin: 5px;
 }
 
-#icons{
-    min-width: 100px;
-    max-width: 100px;
-}
-
-.lnk{
-    cursor: pointer;
-}
-
-#toggleFnt{
-    float: right;
-}
-
 
 
 .fullWidth{
@@ -162,10 +145,8 @@ a:focus{
 .centerContainer {
     display: table;
     height: 100%;
-    /*width: 100%;*/
 }
 .centerElement {
     display: table-cell;
     vertical-align: middle;
-    /*width: 100%;*/
 }
