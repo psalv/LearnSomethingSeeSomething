@@ -15,7 +15,6 @@
 body{
     background-color: black;
     color: white;
-    /*height: 100vh;*/
 }
 
 /* POPUP */
@@ -23,12 +22,7 @@ body{
 #popup{
     width:200px;
     padding: 3%;
-
-    /*vertical-align: middle;*/
-    /*margin: auto;*/
     display: block;
-    /*overflow-x: hidden;*/
-    /*background-color: yellow !important;*/
 }
 
 
